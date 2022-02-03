@@ -1,10 +1,32 @@
 const Character = require('../models/characters');
 const Movie = require('../models/movies');
+const { Op } = require('sequelize');
 
 
 getCharacters = (req, res) => {
+    const { name, age, weight, movies } = req.query
+
+    const characterFilters = {};
+    if (name) {
+        characterFilters.name = {
+            [Op.like]: `${name}%`
+        }
+    }
+    if (age) { characterFilters.age = age }
+    if (weight) { characterFilters.weight = weight }
+
+    const movieFilters = {};
+    if (movies) { movieFilters.id = movies }
+    
+    console.log(characterFilters)
     Character.findAll({
-        attributes  : ["name", "imageUrl"]
+        attributes  : ["name", "imageUrl"],
+        where: characterFilters,
+        include: [{
+            model: Movie,
+            where: movieFilters,
+            attributes: []
+        }]                
     })
     .then(characters => {
         return res.send(characters)
