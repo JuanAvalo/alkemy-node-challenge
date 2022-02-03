@@ -29,6 +29,6 @@ const Character = sequelize.define('character', {
         type: Sequelize.STRING,
         allowNull: false
     },
-});
+}, {timestamps: false});
 
 module.exports = Character;

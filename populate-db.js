@@ -78,6 +78,12 @@ const movies = [
     },
     {
         imageUrl: 'https://static.wikia.nocookie.net/disney/images/0/07/Brave_poster.jpg/revision/latest/scale-to-width-down/515?cb=20141201050701',
+        title: 'Iron Man 2',
+        creationDate: '2012-06-22',
+        rate: 5
+    },
+    {
+        imageUrl: 'https://static.wikia.nocookie.net/disney/images/0/07/Brave_poster.jpg/revision/latest/scale-to-width-down/515?cb=20141201050701',
         title: 'Brave',
         creationDate: '2012-06-22',
         rate: 5
@@ -144,6 +150,11 @@ Movie.belongsToMany(Genre, {through: 'movie-genre'});
                     return (async () => {
                         await movie.addGenres(genresList.filter(genre => ['Family', 'Adventure'].includes(genre.name)));
                         await movie.addCharacters(charactersList.filter(character => ['Coco Rivera', 'Miguel Rivera'].includes(character.name)));
+                    })()
+                case 'Iron Man 2':
+                    return (async () => {
+                        await movie.addGenres(genresList.filter(genre => ['Superhero', 'Action'].includes(genre.name)));
+                        await movie.addCharacters(charactersList.filter(character => ['Iron Man'].includes(character.name)));
                     })()
                 default:
                     console.log("ola")

@@ -17,6 +17,6 @@ const Genre = sequelize.define('genre', {
         type: Sequelize.STRING,
         allowNull: false
     }
-});
+}, {timestamps: false});
 
 module.exports = Genre;
