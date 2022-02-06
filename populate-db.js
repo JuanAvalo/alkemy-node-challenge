@@ -1,6 +1,8 @@
 const Genre = require('./models/genres');
 const Character = require('./models/characters');
 const Movie = require('./models/movies');
+const MovieCharacter = require('./models/movies-characters');
+const MovieGenre = require('./models/movies-genres');
 
 const sequelize = require('./util/db');
 
@@ -102,10 +104,10 @@ const movies = [
     }
 ]
 
-Character.belongsToMany(Movie, {through: 'movie-character'});
-Movie.belongsToMany(Character, {through: 'movie-character'});
-Genre.belongsToMany(Movie, {through: 'movie-genre'});
-Movie.belongsToMany(Genre, {through: 'movie-genre'});
+Character.belongsToMany(Movie, {through: MovieCharacter});
+Movie.belongsToMany(Character, {through: MovieCharacter});
+Genre.belongsToMany(Movie, {through: MovieGenre});
+Movie.belongsToMany(Genre, {through: MovieGenre});
 
 
 //npm install @types/sequelize
@@ -129,6 +131,8 @@ Movie.belongsToMany(Genre, {through: 'movie-genre'});
         const moviesList = await Movie.findAll();
         const genresList = await Genre.findAll();
         const charactersList = await Character.findAll();
+
+        // associations
         const movieListPromises = moviesList.map(movie => {
             switch(movie.title) {
                 case 'The Lion King':

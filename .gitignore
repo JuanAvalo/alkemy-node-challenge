@@ -1,1 +1,5 @@
 node_modules
+controllers/authControllers.js
+middleware
+models/user.js
+routes/authRoutes
