@@ -1,12 +1,12 @@
-const { mail_service } = require('/home/juan/projects/config/config');
+const { mail_Service } = require('../config');
 const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(mail_service.apiKey);
+sgMail.setApiKey(mail_Service.apiKey);
 welcomeMail = ( mailTo ) => {
     const msg = {
     to: mailTo,
-    from: mail_service.from,
-    templateId: 'd-51d52bec627f42f7bf0987f10b689c02'
+    from: mail_Service.from,
+    templateId: mail_Service.templateId
     };
     //ES6
     sgMail

@@ -1,11 +1,10 @@
-const config = require('/home/juan/projects/config/config');
+const config = require('../config');
 
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('disney_challenge', config.database_mysql.user, config.database_mysql.password, {
+const sequelize = new Sequelize(config.db_mysql.database, config.db_mysql.user, config.db_mysql.password, {
     dialect: 'mysql',
-    host: config.database_mysql.host
+    host: config.db_mysql.host
 });
 
 module.exports = sequelize;
-
