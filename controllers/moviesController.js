@@ -28,7 +28,7 @@ getMovies = async (req, res) => {
     
     try {
         const movies = await Movie.findAll({
-            attributes  : ["title", "imageUrl", "creationDate"],
+            attributes  : ["id", "title", "imageUrl", "creationDate"],
             where: movieFilters,
             order: [orderFilter],
             include: [{
@@ -48,7 +48,7 @@ getMovieById = async(req,res)=>{
        const movie =  await Movie.findByPk(id, {
            include : [{
                model: Character,
-               attributes: ['name'],
+               attributes: ['id', 'name'],
                through: {
                    attributes: []
                }
@@ -114,7 +114,7 @@ postMovieById = async (req, res) => {
     try{
         if (isNaN(id)) { return res.status(400).send( 'Invalid id ')}
         if (imageUrl && title && rate && creationDate) {
-             await Movie.update({
+            await Movie.update({
                 imageUrl: imageUrl,
                 title: title,
                 rate: rate,
@@ -163,7 +163,7 @@ postMovieById = async (req, res) => {
                         }
                     })
                 })                
-                await Promise.all(editedNewGenre);
+                await Promise.all(editedNewGenre)
             }
             return res.send('Succesfully edited!').status(200)
         }
@@ -190,4 +190,3 @@ module.exports = {
     postMovieById,
     deleteMovie
 }
-

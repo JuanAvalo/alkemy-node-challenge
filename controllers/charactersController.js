@@ -21,7 +21,7 @@ getCharacters = async (req, res) => {
     
     try {
         const characters = await Character.findAll({
-            attributes  : ["name", "imageUrl"],
+            attributes  : ["id","name", "imageUrl"],
             where: characterFilters,
             include: [{
                 model: Movie,
@@ -40,7 +40,7 @@ getCharacterById = async (req, res) => {
         const character = await Character.findByPk(id, {
             include: [{
                 model: Movie,
-                attributes: ["title"],
+                attributes: ["id", "title"],
                 through: {
                     attributes: []
                 }            
@@ -115,7 +115,7 @@ postCharacterById = async (req, res) => {
                         }
                     })
                 })
-                await Promise.all(editedNewMovies);                
+                await Promise.all(editedNewMovies);
             }
             return res.status(200).send('Character edited succesfully!')
         }
