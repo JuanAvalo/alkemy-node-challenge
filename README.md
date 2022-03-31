@@ -41,20 +41,18 @@ To get a local copy up and running follow these simple steps.
    ```sh
    npm install
    ```
-3. Enter you configuration in `config.js`
+3. Configure in the root folder your `.env` file
    ```js
-   db_mysql: {
-	   database: 'YOUR MYSQL DB NAME',
-	   host: 'YOUR MYSQL DB HOSTNAME',
-	   user: 'YOUR MYSQL DB USERNAME',
-	   password: 'YOUR MYSQL DB PASSWORD'
-	   }
+   
+	    DATABASE= 'YOUR MYSQL DB NAME',
+	    HOST= 'YOUR MYSQL DB HOSTNAME',
+	    USER= 'YOUR MYSQL DB USERNAME',
+	    PASSWORD= 'YOUR MYSQL DB PASSWORD'
 
-	mail_Service: {
-		apiKey: 'The API key you got from Send Grid',
-		from: 'The mail from where you want to send your welcome email',
-		templateId: 'The template you created on Dynamic Templates'
-		}
+	    MAIL_APIKEY= 'The API key you got from Send Grid',
+		MAIL_FROM= 'The mail from where you want to send your welcome email',
+		MAIL_TEMPLATE= 'The template you created on Dynamic Templates'
+		
    ```  
 4. Populate the DB (optional)
    ```sh
