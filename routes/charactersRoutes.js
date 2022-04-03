@@ -4,14 +4,14 @@ const auth = require('../middleware/is-auth');
 
 const charactersController = require('../controllers/charactersController');
 
-router.get('/characters/:id', auth, charactersController.getCharacterById);
+router.get('/characters/:id', charactersController.getCharacterById);
 
-router.get('/characters', auth, charactersController.getCharacters);
+router.get('/characters', charactersController.getCharacters);
 
-router.post('/characters', auth, charactersController.postCharacter);
+router.post('/characters', charactersController.postCharacter);
 
-router.post('/characters/:id', auth, charactersController.postCharacterById);
+router.post('/characters/:id', charactersController.postCharacterById);
 
-router.delete('/characters/:id', auth, charactersController.deleteCharacter);
+router.delete('/characters/:id', charactersController.deleteCharacter);
 
 module.exports = router;

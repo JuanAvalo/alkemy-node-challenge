@@ -1,6 +1,5 @@
 const express = require('express');
 const sequelize = require('./util/db');
-const session = require('express-session');
 
 //Routes
 const charactersRoutes = require('./routes/charactersRoutes');
@@ -18,10 +17,7 @@ const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-app.use( session({
-    secret: 'ThisShouldBeAVerySecretWord',
-    resave: false
-}))
+
 
 app.use(charactersRoutes);
 app.use(moviesRoutes);
