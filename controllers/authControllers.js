@@ -1,3 +1,5 @@
+const tokenHandler = require('../middleware/is-auth')
+
 const User = require('../models/user');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
@@ -13,7 +15,7 @@ postSignUp = async (req,res) => {
                 email,
                 password: hashedPassword
             })
-            welcomeMail(email);
+            //welcomeMail(email);
             res.status(200).send('User Created!')
         }
         else { return res.status(400).send('Check your email or password' )}
@@ -28,8 +30,8 @@ postLogin = async (req,res) => {
         if (user) {
             const isCorrectPassword = await bcrypt.compare(password, user.password);
             if (isCorrectPassword) { 
-                req.session.isLoggedIn = true;
-                return res.send('Logged In!') 
+                const authToken = tokenHandler.createToken(user.email);
+                return res.json({"token":authToken})
             } else { return res.status(400).send('Incorrect Password') }
         }
         else { return res.status(400).send('User does not exist')}        
@@ -38,7 +40,6 @@ postLogin = async (req,res) => {
 }
 
 postLogout = (req, res) => {
-    req.session.destroy();
     return res.send('Logged Out!')
 }
 
